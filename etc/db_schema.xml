@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © 2023 LopezPaul. All rights reserved.
+ *
+ * @package  Lopezpaul_Blog
+ * @author   Paul Lopez <paul.lopezm@gmail.com>
+ * @license  See LICENSE.txt for license details.
+ * @link     https://github.com/lopezpaul/magento2-modules
+ */
+ -->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="lopezpaul_blog_post" resource="default" engine="innodb"
+           comment="Lopezpaul_Blog posts table">
+        <column xsi:type="int" name="id" padding="20" unsigned="true" identity="true" nullable="false" comment="ID"/>
+        <column xsi:type="varchar" name="title" nullable="false" length="255" comment="Title"/>
+        <column xsi:type="text" name="content" nullable="false" comment="Content"/>
+        <column xsi:type="datetime" name="created_at" default="0" nullable="false"  comment="Date of creation"/>
+        <column xsi:type="datetime" name="updated_at" default="0" nullable="false"  comment="When post updated"/>
+        <column xsi:type="datetime" name="publish_at" default="0" nullable="false"  comment="Publication Date"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+</schema>

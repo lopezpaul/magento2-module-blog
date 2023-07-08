@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © 2023 LopezPaul. All rights reserved.
+ *
+ * @package  Lopezpaul_Blog
+ * @author   Paul Lopez <paul.lopezm@gmail.com>
+ * @license  See LICENSE.txt for license details.
+ * @link     https://github.com/lopezpaul/magento2-modules
+ */
+ -->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">lopezpaul_blog_post_form.lopezpaul_blog_post_form_data_source</item>
+            <item name="deps" xsi:type="string">lopezpaul_blog_post_form.lopezpaul_blog_post_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Post</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">lopezpaul_blog_post_form</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Lopezpaul\Blog\Block\Adminhtml\Post\Edit\BackButton</item>
+            <item name="delete" xsi:type="string">Lopezpaul\Blog\Block\Adminhtml\Post\Edit\DeleteButton</item>
+            <item name="reset" xsi:type="string">Lopezpaul\Blog\Block\Adminhtml\Post\Edit\ResetButton</item>
+            <item name="save" xsi:type="string">Lopezpaul\Blog\Block\Adminhtml\Post\Edit\SaveButton</item>
+            <item name="save_and_continue" xsi:type="string">
+                Lopezpaul\Blog\Block\Adminhtml\Post\Edit\SaveAndContinueButton
+            </item>
+        </item>
+    </argument>
+    <dataSource name="lopezpaul_blog_post_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Lopezpaul\Blog\Model\Post\DataProvider</argument>
+            <argument name="name" xsi:type="string">lopezpaul_blog_post_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="lopezpaul_blog/post/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">General Information</item>
+            </item>
+        </argument>
+
+        <field name="id" sortOrder="10">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">DAta Id</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">data</item>
+                    <item name="dataScope" xsi:type="string">id</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="id" sortOrder="11">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Post Id</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="dataScope" xsi:type="string">id</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="title" sortOrder="20">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Title</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="dataScope" xsi:type="string">title</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="content" sortOrder="30">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="cols" xsi:type="number">15</item>
+                    <item name="rows" xsi:type="number">10</item>
+                    <item name="label" translate="true" xsi:type="string">Content</item>
+                    <item name="dataType" translate="true" xsi:type="string">text</item>
+                    <item name="source" xsi:type="string">post</item>
+                    <item name="dataScope" xsi:type="string">content</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="publish_at" formElement="date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">post</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="validate-date" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Publish At</label>
+                <visible>true</visible>
+                <dataScope>publish_at</dataScope>
+            </settings>
+        </field>
+
+    </fieldset>
+</form>

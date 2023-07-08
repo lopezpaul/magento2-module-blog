@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © 2023 LopezPaul. All rights reserved.
+ *
+ * @package  Lopezpaul_Blog
+ * @author   Paul Lopez <paul.lopezm@gmail.com>
+ * @license  See LICENSE.txt for license details.
+ * @link     https://github.com/lopezpaul/magento2-modules
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Lopezpaul_Blog::lopezpaul" title="LopezPaul"
+             translate="title" module="Lopezpaul_Blog" sortOrder="100"
+             parent="Magento_Backend::content" resource="Lopezpaul_Blog::posts"/>
+        <add id="Lopezpaul_Blog::posts" title="Blog" translate="title" module="Lopezpaul_Blog"
+             sortOrder="1" parent="Lopezpaul_Blog::lopezpaul" action="lopezpaul_blog/post/index"
+             resource="Lopezpaul_Blog::posts"/>
+    </menu>
+</config>

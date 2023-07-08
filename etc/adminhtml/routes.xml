@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © 2023 LopezPaul. All rights reserved.
+ *
+ * @package  Lopezpaul_Blog
+ * @author   Paul Lopez <paul.lopezm@gmail.com>
+ * @license  See LICENSE.txt for license details.
+ * @link     https://github.com/lopezpaul/magento2-modules
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="admin">
+        <route id="lopezpaul_blog" frontName="lopezpaul_blog">
+            <module name="Lopezpaul_Blog" before="Magento_Backend"/>
+        </route>
+    </router>
+</config>
