@@ -1,5 +1,6 @@
 type Query {
     posts: [Post] @resolver(class: "Lopezpaul\\Blog\\Model\\Resolver\\Post")
+        @cache(cacheIdentity: "Lopezpaul\\Blog\\Model\\Resolver\\Post\\Identity")
         @doc(description: "Return Post")
 }
 type Post @doc(description: "Details of a Post") {

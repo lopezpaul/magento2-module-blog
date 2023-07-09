@@ -94,7 +94,7 @@ class PostRepository implements PostRepositoryInterface
                 return $this->loadedPost[$id];
             }
             $modelPost = $post->load($id);
-            $this->setLoadedpostRecords([$modelPost],true);
+            $this->setLoadedpostRecords([$modelPost], true);
             return $this->loadedPost[$id] ?? $post;
         }
         return $post;

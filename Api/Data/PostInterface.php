@@ -63,6 +63,7 @@ interface PostInterface
 
     /**
      * Store content
+     *
      * @param string $content
      * @return $this
      */

@@ -1,10 +1,15 @@
 <?php
 
 declare(strict_types=1);
+
 /**
- * @by SwiftOtter, Inc.
- * @website https://swiftotter.com
- **/
+ * Copyright © 2023 LopezPaul. All rights reserved.
+ *
+ * @package  Lopezpaul_Blog
+ * @author   Paul Lopez <paul.lopezm@gmail.com>
+ * @license  See LICENSE.txt for license details.
+ * @link     https://github.com/lopezpaul/magento2-modules
+ */
 
 namespace Lopezpaul\Blog\Model\Resolver\DataProvider;
 
@@ -15,12 +20,21 @@ use Psr\Log\LoggerInterface;
 
 class Post
 {
+    /**
+     * @param PostRepositoryInterface $postRepository
+     * @param LoggerInterface $logger
+     */
     public function __construct(
         private PostRepositoryInterface $postRepository,
         private readonly LoggerInterface $logger
     ) {
     }
 
+    /**
+     * Retrieve Posts
+     *
+     * @return array|void
+     */
     public function getAllPosts()
     {
         try {
@@ -35,6 +49,12 @@ class Post
         }
     }
 
+    /**
+     * Get only post data
+     *
+     * @param PostInterface $post
+     * @return array
+     */
     private function formatPostData(PostInterface $post)
     {
         return [

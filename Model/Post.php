@@ -170,7 +170,6 @@ class Post extends AbstractExtensibleModel implements PostInterface, IdentityInt
         return $this->setData(self::PUBLISH_AT, $date);
     }
 
-
     /**
      * @inheritdoc
      */
@@ -188,7 +187,6 @@ class Post extends AbstractExtensibleModel implements PostInterface, IdentityInt
         return $this->setData(self::IS_DRAFT, (bool)$isDraft);
     }
 
-
     /**
      * Initialize resource model
      *
@@ -198,6 +196,4 @@ class Post extends AbstractExtensibleModel implements PostInterface, IdentityInt
     {
         $this->_init(PostResourceModel::class);
     }
-
-
 }
