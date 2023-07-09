@@ -16,6 +16,7 @@
         <column xsi:type="int" name="id" padding="20" unsigned="true" identity="true" nullable="false" comment="ID"/>
         <column xsi:type="varchar" name="title" nullable="false" length="255" comment="Title"/>
         <column xsi:type="text" name="content" nullable="false" comment="Content"/>
+        <column xsi:type="boolean" name="is_draft" nullable="false" default="true" comment="If post is a draft"/>
         <column xsi:type="datetime" name="created_at" default="0" nullable="false"  comment="Date of creation"/>
         <column xsi:type="datetime" name="updated_at" default="0" nullable="false"  comment="When post updated"/>
         <column xsi:type="datetime" name="publish_at" default="0" nullable="false"  comment="Publication Date"/>

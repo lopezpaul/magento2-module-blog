@@ -21,6 +21,7 @@ interface PostInterface
     public const CREATED_AT = 'created_at';
     public const UPDATED_AT = 'updated_at';
     public const PUBLISH_AT = 'publish_at';
+    public const IS_DRAFT = 'is_draft';
     public const PERSISTENT_DATA_KEY = 'post_model_data';
 
     /**
@@ -36,14 +37,14 @@ interface PostInterface
      * @param int|mixed $id
      * @return $this
      */
-    public function setId(mixed $id);
+    public function setId(mixed $id):PostInterface;
 
     /**
      * Retrieve title field
      *
      * @return string
      */
-    public function getTitle();
+    public function getTitle():string;
 
     /**
      * Store title
@@ -51,7 +52,7 @@ interface PostInterface
      * @param string $title
      * @return $this
      */
-    public function setTitle(string $title);
+    public function setTitle(string $title):PostInterface;
 
     /**
      * Retrieve content field
@@ -62,11 +63,10 @@ interface PostInterface
 
     /**
      * Store content
-     *
      * @param string $content
      * @return $this
      */
-    public function setContent(string $content);
+    public function setContent(string $content):PostInterface;
 
     /**
      * Retrieve publish_at field
@@ -81,5 +81,20 @@ interface PostInterface
      * @param string $date
      * @return $this
      */
-    public function setPublishAt(string $date);
+    public function setPublishAt(string $date):PostInterface;
+
+    /**
+     * Retrieve is_draft field
+     *
+     * @return bool
+     */
+    public function getIsDraft():bool;
+
+    /**
+     * Store content
+     *
+     * @param bool $isDraft
+     * @return $this
+     */
+    public function setIsDraft(bool $isDraft):PostInterface;
 }

@@ -115,7 +115,7 @@
             </argument>
         </field>
 
-        <field name="publish_at" formElement="date">
+        <field name="publish_at" formElement="date" sortOrder="40">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">post</item>
@@ -130,6 +130,34 @@
                 <visible>true</visible>
                 <dataScope>publish_at</dataScope>
             </settings>
+        </field>
+        <field name="is_draft" sortOrder="50" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="string">1</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Is Draft?</label>
+                <dataScope>is_draft</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options>
+                            <option name="0" xsi:type="array">
+                                <item name="value" xsi:type="string">0</item>
+                                <item name="label" xsi:type="string" translate="true">No</item>
+                            </option>
+                            <option name="1" xsi:type="array">
+                                <item name="value" xsi:type="string">1</item>
+                                <item name="label" xsi:type="string" translate="true">Yes</item>
+                            </option>
+                        </options>
+                    </settings>
+                </select>
+            </formElements>
         </field>
 
     </fieldset>

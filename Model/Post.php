@@ -27,8 +27,6 @@ class Post extends AbstractExtensibleModel implements PostInterface, IdentityInt
 {
     /** @var string */
     public const CACHE_KEY = 'lopezpaul_blog_post';
-    /** @var StoreManagerInterface */
-    public StoreManagerInterface $storeManager;
 
     /**
      * @param Context $context
@@ -45,12 +43,11 @@ class Post extends AbstractExtensibleModel implements PostInterface, IdentityInt
         \Magento\Framework\Registry $registry,
         ExtensionAttributesFactory $extensionFactory,
         AttributeValueFactory $customAttributeFactory,
-        StoreManagerInterface $storeManager,
+        private readonly StoreManagerInterface $storeManager,
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = []
     ) {
-        $this->storeManager = $storeManager;
         $this->_eventPrefix = self::CACHE_KEY;
         $this->_cacheTag = self::CACHE_KEY;
         parent::__construct(
@@ -84,7 +81,7 @@ class Post extends AbstractExtensibleModel implements PostInterface, IdentityInt
      */
     public function setId(
         mixed $id
-    ) {
+    ): PostInterface {
         return $this->setData(self::ID, $id);
     }
 
@@ -93,7 +90,7 @@ class Post extends AbstractExtensibleModel implements PostInterface, IdentityInt
      */
     public function setTitle(
         string $title
-    ) {
+    ): PostInterface {
         return $this->setData(self::TITLE, trim($title));
     }
 
@@ -110,7 +107,7 @@ class Post extends AbstractExtensibleModel implements PostInterface, IdentityInt
      */
     public function setContent(
         $content
-    ) {
+    ): PostInterface {
         return $this->setData(self::CONTENT, trim($content));
     }
 
@@ -127,14 +124,14 @@ class Post extends AbstractExtensibleModel implements PostInterface, IdentityInt
      */
     public function setCreatedAt(
         $createdAt
-    ) {
+    ): PostInterface {
         return $this->setData(self::CREATED_AT, $createdAt);
     }
 
     /**
      * @inheritdoc
      */
-    public function getCreatedAt()
+    public function getCreatedAt(): string
     {
         return $this->getData(self::CREATED_AT);
     }
@@ -142,7 +139,7 @@ class Post extends AbstractExtensibleModel implements PostInterface, IdentityInt
     /**
      * @inheritdoc
      */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): string
     {
         return $this->getData(self::UPDATED_AT);
     }
@@ -152,14 +149,14 @@ class Post extends AbstractExtensibleModel implements PostInterface, IdentityInt
      */
     public function setUpdatedAt(
         $updatedAt
-    ) {
+    ): PostInterface {
         return $this->setData(self::UPDATED_AT, $updatedAt);
     }
 
     /**
      * @inheritdoc
      */
-    public function getPublishAt()
+    public function getPublishAt(): string
     {
         return $this->getData(self::PUBLISH_AT);
     }
@@ -169,9 +166,28 @@ class Post extends AbstractExtensibleModel implements PostInterface, IdentityInt
      */
     public function setPublishAt(
         string $date
-    ) {
+    ): PostInterface {
         return $this->setData(self::PUBLISH_AT, $date);
     }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function getIsDraft(): bool
+    {
+        return (bool)$this->getData(self::IS_DRAFT);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setIsDraft(
+        bool $isDraft
+    ): PostInterface {
+        return $this->setData(self::IS_DRAFT, (bool)$isDraft);
+    }
+
 
     /**
      * Initialize resource model
@@ -182,4 +198,6 @@ class Post extends AbstractExtensibleModel implements PostInterface, IdentityInt
     {
         $this->_init(PostResourceModel::class);
     }
+
+
 }

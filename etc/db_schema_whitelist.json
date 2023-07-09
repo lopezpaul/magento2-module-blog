@@ -6,7 +6,8 @@
             "content": true,
             "created_at": true,
             "updated_at": true,
-            "publish_at": true
+            "publish_at": true,
+            "is_draft": true
         },
         "constraint": {
             "PRIMARY": true

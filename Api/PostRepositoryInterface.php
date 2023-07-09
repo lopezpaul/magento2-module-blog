@@ -27,37 +27,37 @@ interface PostRepositoryInterface
      * @param bool $saveOptions
      * @return PostInterface|null
      */
-    public function save(PostInterface $post, bool $saveOptions = false);
+    public function save(PostInterface $post, bool $saveOptions = false): ?PostInterface;
 
     /**
      * Retrieve Post by id
      *
      * @param mixed $id
-     * @return mixed
+     * @return PostInterface
      */
-    public function get(mixed $id):mixed;
+    public function get(mixed $id): PostInterface;
 
     /**
      * Retrieve all post
      *
      * @param bool $forceReload
-     * @return mixed
+     * @return array
      */
-    public function getAll(bool $forceReload = false):mixed;
+    public function getAll(bool $forceReload = false): array;
 
     /**
      * Delete post
      *
      * @param PostInterface $post
-     * @return mixed
+     * @return bool
      */
-    public function delete(PostInterface $post);
+    public function delete(PostInterface $post): bool;
 
     /**
      * Remove post by id
      *
      * @param int $id
-     * @return mixed
+     * @return bool
      */
-    public function deleteById(int $id);
+    public function deleteById(int $id): bool;
 }

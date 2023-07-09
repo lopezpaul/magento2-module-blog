@@ -1,0 +1,13 @@
+type Query {
+    posts: [Post] @resolver(class: "Lopezpaul\\Blog\\Model\\Resolver\\Post")
+        @doc(description: "Return Post")
+}
+type Post @doc(description: "Details of a Post") {
+    id: Int! @doc(description: "Post ID")
+    title: String! @doc(description: "Title")
+    content: String @doc(description: "Content")
+    created_at: String @doc(description: "Created At")
+    publish_at: String @doc(description: "Publish At")
+    updated_at: String @doc(description: "Updted At")
+    is_draft: Boolean @doc(description: "Is Draft?")
+}

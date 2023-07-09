@@ -27,8 +27,8 @@ class PostRepository implements PostRepositoryInterface
 {
     private const LOADED_POSTS_KEY = 'lopezpaul_blog_posts_loaded';
 
-    /** @var mixed|null */
-    protected mixed $loadedPost = null;
+    /** @var array */
+    protected array $loadedPost = [];
 
     /**
      * @param PostInterfaceFactory $postFactory
@@ -58,7 +58,7 @@ class PostRepository implements PostRepositoryInterface
      * @throws CouldNotDeleteException
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function deleteById(int $id)
+    public function deleteById(int $id): bool
     {
         return $this->delete($this->get($id));
     }
@@ -70,7 +70,7 @@ class PostRepository implements PostRepositoryInterface
      * @return bool
      * @throws CouldNotDeleteException
      */
-    public function delete(PostInterface $post)
+    public function delete(PostInterface $post): bool
     {
         try {
             $this->resourcePost->delete($post);
@@ -84,20 +84,18 @@ class PostRepository implements PostRepositoryInterface
      * Get Post by id
      *
      * @param mixed $id
-     * @return mixed|PostInterface
+     * @return PostInterface
      */
-    public function get(mixed $id): mixed
+    public function get(mixed $id): PostInterface
     {
         $post = $this->postFactory->create();
         if (!empty($id)) {
             if (isset($this->loadedPost[$id])) {
                 return $this->loadedPost[$id];
             }
-
-            $this->resourcePost->load($post, $id);
-            if ($post->getId()) {
-                $this->setLoadedpostRecords([$post], true);
-            }
+            $modelPost = $post->load($id);
+            $this->setLoadedpostRecords([$modelPost],true);
+            return $this->loadedPost[$id] ?? $post;
         }
         return $post;
     }
@@ -113,7 +111,7 @@ class PostRepository implements PostRepositoryInterface
     {
         $loadedPost = [];
         foreach ($postRecords as $postRecord) {
-            $loadedPost[$postRecord->getId()] = $postRecord;
+            $loadedPost[$postRecord?->getId()] = $postRecord;
         }
         if ($merge && is_array($this->loadedPost)) {
             $this->loadedPost = array_merge($this->loadedPost, $loadedPost);
@@ -126,13 +124,17 @@ class PostRepository implements PostRepositoryInterface
      * Retrieve all Post from database
      *
      * @param bool $forceReload
-     * @return mixed|null
+     * @return array
      */
-    public function getAll(bool $forceReload = false): mixed
+    public function getAll(bool $forceReload = false): array
     {
         if (empty($this->loadedPost) || $forceReload) {
-            $postRecords = $this->postCollection->create()->load() ?? [];
-            $this->setLoadedpostRecords($postRecords);
+            $postRecords = $this->postCollection->create()->load();
+            $tmp = [];
+            foreach ($postRecords as $postRecord) {
+                $tmp[$postRecord?->getId()] = $postRecord;
+            }
+            $this->setLoadedpostRecords($tmp);
         }
         return $this->loadedPost;
     }
@@ -156,6 +158,7 @@ class PostRepository implements PostRepositoryInterface
         $postRecord = $this->createPostInterface();
         $postRecord->setTitle($postData[PostInterface::TITLE]);
         $postRecord->setContent($postData[PostInterface::CONTENT]);
+        $postRecord->setIsDraft($postData[PostInterface::IS_DRAFT] ?? true);
         $postRecord->setPublishAt($postData[PostInterface::PUBLISH_AT] ?? $this->datetime->gmtDate());
         $postRecord = $this->save($postRecord);
         $this->loadedPost[$postRecord->getId()] = $postRecord;
@@ -183,9 +186,9 @@ class PostRepository implements PostRepositoryInterface
     /**
      * Create Post Interface
      *
-     * @return PostInterface
+     * @return PostInterface|null
      */
-    public function createPostInterface()
+    public function createPostInterface(): ?PostInterface
     {
         return $this->postFactory->create();
     }

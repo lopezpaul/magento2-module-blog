@@ -17,34 +17,37 @@
 - [Installation](#installation)
 - [Usage](#usage)
 - [Dependencies](#dependencies)
+- [GraphQL](#graphql)
 
 ---
-
 ## Summary
+
+---
 
 Create Admin Grid for manage Post table "lopezpaul_blog_post" with columns:
 
 - id
 - title
 - content
+- is_draft
 - created_at
 - updated_at
 - publish_at
 
----
 
 ## Installation
 
+---
 ```
 composer require lopezpaul/magento2-blog
 bin/magento module:enable Lopezpaul_Blog
 bin/magento setup:upgrade
 ```
 
----
 
 ## Usage
 
+---
 Enter to admin panel and login and go to `Content > LopezPaul > Blog`
 ![Menu](Assets/menu-blog.png)
 
@@ -61,15 +64,36 @@ You can use any filter and apply them to search Posts.
 Permissions
 ![Roles](Assets/roles.png)
 Create User roles with the right permissions.
----
+
 
 ## Dependencies
+
+---
 
 - Magento_Backend
 - Magento_Ui
 
+
+## Permissions
+
 ---
-
-#### Permissions
-
 You can create new Role to set the right permissions
+
+## GraphQL
+
+---
+![GraphQL](Assets/GraphQL.png)
+Go to your magento `<domain_url>/graphql`
+```
+query{
+  posts{
+    id
+    title
+    content
+    is_draft
+    created_at
+    updated_at
+    publish_at
+  }
+}
+```
